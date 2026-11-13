@@ -1,8 +1,13 @@
-# Pokémon: Jornada dos Mestres — Edição Final
+# Pokémon: Jornada dos Mestres
 
-RPG educacional em **Java 17**, executado no **console**, desenvolvido para a disciplina **Paradigmas de Programação**. Demonstra orientação a objetos, herança, abstração, polimorfismo, encapsulamento, composição e os **cinco princípios SOLID**.
+Projeto de RPG em console desenvolvido em **Java** para a disciplina de **Paradigmas de Programação**, com foco em Programação Orientada a Objetos (POO) e nos cinco princípios SOLID. A jornada inclui batalhas por turnos, captura e evolução de Pokémon, ginásios e a Liga Pokémon.
 
-> **Projeto de fã, não comercial e não oficial**, sem afiliação à Nintendo, Game Freak ou The Pokémon Company. O universo Pokémon é utilizado somente como tema de uma atividade acadêmica.
+> Projeto acadêmico de fã, sem finalidade comercial e sem vínculo com Nintendo, Game Freak ou The Pokémon Company.
+
+## Requisitos
+
+- Java Development Kit (JDK) 17 ou superior.
+- Nenhuma biblioteca externa é necessária.
 
 ## Como executar
 
@@ -24,7 +29,7 @@ javac -encoding UTF-8 -d out src\*.java
 java -cp out Main
 ```
 
-O menu oferece **Nova jornada**, **Continuar partida salva** e, durante o jogo, **Salvar partida** e **Salvar e sair**. O progresso é gravado em `save/partida.properties` relativo ao diretório em que o programa é executado. Esse arquivo não deve ser enviado ao GitHub.
+O menu oferece **Nova jornada**, **Continuar partida salva** e, durante o jogo, **Salvar partida** e **Salvar e sair**. O progresso é gravado em `save/partida.properties` relativo ao diretório em que o programa é executado. O arquivo de salvamento é mantido localmente e ignorado pelo Git.
 
 ## Mecânicas implementadas
 
@@ -38,11 +43,9 @@ O menu oferece **Nova jornada**, **Continuar partida salva** e, durante o jogo, 
 
 ## Imagem da execução
 
-![Exemplo da execução real do jogo pelo console durante teste automatizado](docs/execucao-console.png)
+![Execução do Pokémon: Jornada dos Mestres no console](docs/execucao-console.png)
 
-> Captura visual construída a partir da **saída real da execução do programa** em terminal. Recomenda-se também adicionar uma captura obtida no IntelliJ com uma batalha em andamento antes de entregar.
-
-## Orientação a objetos: onde aparece no código
+## Programação Orientada a Objetos
 
 - **Abstração:** `Pokemon` é classe abstrata e define operações compartilhadas, como `receberDano`, `curar`, `ganharExperiencia` e `getEspecialidade`.
 - **Herança:** `PokemonFogo`, `PokemonAgua`, `PokemonPlanta` e `PokemonNormal` estendem `Pokemon`.
@@ -50,7 +53,7 @@ O menu oferece **Nova jornada**, **Continuar partida salva** e, durante o jogo, 
 - **Encapsulamento:** atributos privados de `Pokemon` e `Inventario`; operações públicas preservam regras de HP, XP, itens e limites da equipe.
 - **Composição:** `Treinador` possui `Inventario` e uma equipe de `Pokemon`; `Jornada` guarda as conquistas e utiliza um `Combate`.
 
-## Os cinco princípios SOLID, com exemplos verificáveis
+## Princípios SOLID
 
 ### S — Single Responsibility Principle (Responsabilidade Única)
 
@@ -67,7 +70,7 @@ Assim, alterar o cálculo de XP não exige alterar o sistema de armazenamento ou
 - Um novo sistema de dano (por exemplo, dano com crítico) pode implementar `CalculadoraDano` e ser **injetado no construtor de `Batalha`**, sem editar sua lógica de turnos.
 - Da mesma forma, outra estratégia de captura pode implementar `RegraCaptura`.
 
-Exemplo de uma regra substituível de dano (não aplicada à execução normal):
+Exemplo de implementação alternativa para o cálculo de dano:
 
 ```java
 CalculadoraDano danoFixo = (atacante, defensor, ataque) -> 3;
@@ -100,7 +103,7 @@ As implementações concretas são conectadas no ponto de composição (`Main` o
 
 ## Diagrama UML de classes
 
-O código Mermaid abaixo pode ser visualizado no GitHub e corresponde às principais classes e interfaces **realmente presentes** no projeto:
+O diagrama apresenta as principais classes, interfaces e relações do sistema.
 
 ```mermaid
 classDiagram
@@ -204,7 +207,7 @@ Na pasta principal, compile os fontes e os testes:
 javac -encoding UTF-8 -d out src/*.java testes/*.java
 ```
 
-Execute **em uma pasta temporária**, pois o teste de repositório cria `save/partida.properties` no diretório atual e pode substituir uma partida existente:
+Para evitar sobrescrever um salvamento pessoal, execute os testes em um diretório temporário. O teste de persistência cria `save/partida.properties` no diretório de execução:
 
 ```bash
 cd /caminho/para/uma/pasta/temporaria
@@ -213,30 +216,16 @@ java -ea -cp /caminho/absoluto/do/projeto/out TestesProjeto
 
 Os testes verificam subclasses, polimorfismo, efetividade do dano, chance de captura, metade do XP, troca de estratégias de dano/captura e recuperação do save.
 
-## Organização
+## Estrutura do projeto
 
 ```text
-pokemon-jornada-dos-mestres-entrega/
-├── src/                # Código-fonte Java
-├── testes/             # Testes automatizados
-├── docs/               # Imagem da execução
-├── .gitignore          # Exclui saves, .class e arquivos locais
-└── README.md           # Instruções, SOLID e UML
+src/               Código-fonte do jogo
+├── Main.java      Ponto de entrada da aplicação
+├── Pokemon.java   Classe-base dos Pokémon
+├── Batalha.java   Implementação do combate
+└── ...            Outras classes e interfaces
+testes/            Testes automatizados
+docs/              Imagem de execução
+.gitignore         Arquivos locais ignorados pelo Git
+README.md          Documentação do projeto
 ```
-
-## Publicar no GitHub
-
-1. Crie um repositório público, por exemplo `pokemon-jornada-dos-mestres`.
-2. Abra a pasta do projeto no IntelliJ, use o menu **Git > Create Git Repository** (se ainda não for Git).
-3. Faça o primeiro commit com o código, testes, `README.md`, `docs/` e `.gitignore`.
-4. Publique o repositório no GitHub pelo IntelliJ ou por `git push`.
-5. Confirme no GitHub se o diagrama Mermaid, a imagem e as instruções aparecem corretamente.
-6. **Revise pessoalmente cada classe**: o trabalho é individual e o professor exige que você compreenda integralmente o código submetido.
-
----
-
-**Requisitos:** **Requisitos:** Java 17 ou superior, sem necessidade de bibliotecas externas.
-
-**Tipo de aplicação:** RPG desenvolvido em Java, com interface via console.
-
-**Sobre o projeto:** Trabalho acadêmico individual desenvolvido para a disciplina de Paradigmas de Programação, com foco na aplicação dos conceitos de Programação Orientada a Objetos (POO) e dos cinco princípios SOLID.
