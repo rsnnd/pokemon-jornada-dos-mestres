@@ -235,4 +235,8 @@ pokemon-jornada-dos-mestres-entrega/
 
 ---
 
-**Requisitos:** Java 17+; nenhuma biblioteca externa. **Formato:** RPG de console. **Uso de IA:** assistência de estudo, desenvolvimento e depuração; código deve ser compreendido e revisado pelo aluno.
+**Requisitos:** **Requisitos:** Java 17 ou superior, sem necessidade de bibliotecas externas.
+
+**Tipo de aplicação:** RPG desenvolvido em Java, com interface via console.
+
+**Sobre o projeto:** Trabalho acadêmico individual desenvolvido para a disciplina de Paradigmas de Programação, com foco na aplicação dos conceitos de Programação Orientada a Objetos (POO) e dos cinco princípios SOLID.
