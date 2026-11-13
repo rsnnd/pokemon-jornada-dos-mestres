@@ -143,7 +143,7 @@ classDiagram
         NORMAL
     }
     Treinador "1" *-- "1" Inventario
-    Treinador "1" o-- "1..6" Pokemon
+    Treinador "1" --> "1..6" Pokemon : equipe
     Pokemon "1" *-- "1..*" Ataque
     Ataque --> Tipo
     Pokemon --> Tipo
